@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>普通更新</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      function Demo(props) {
+        const [name, setName] = useState("bob");
+        console.log("渲染");
+        return (
+          <div>
+            <p>{name}</p>
+            <button onClick={() => setName("tom")}>点击改变name的值</button>
+          </div>
+        );
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+      // 1.页面第一次加载回执行一次console  页面试图的name为bob
+      // 2.点击按钮 console还会执行一次 然后试图的name发生变化为tom
+      // 3.再一次点击按钮 console还会执行 但是试图不会变化了
+      // 4. 再次店家按钮 console也不会变化了
+    </script>
+  </body>
+</html>

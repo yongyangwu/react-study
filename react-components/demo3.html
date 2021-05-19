@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../react.js"></script>
+    <script src="../react-dom.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      class Child extends React.PureComponent {
+        render() {
+          console.log("I am rendering");
+          return <div>I am update every {this.props.seconds} seconds</div>;
+        }
+      }
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: new Date(),
+          };
+        }
+
+        componentDidMount() {
+          setInterval(() => {
+            this.setState({
+              date: new Date(),
+            });
+          }, 1000);
+        }
+
+        render() {
+          return (
+            <div>
+              <Child seconds={1} />
+              <div>{this.state.date.toString()}</div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

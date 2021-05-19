@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../react.js"></script>
+    <script src="../react-dom.js"></script>
+    <script src="../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        state = { count: 0 };
+        log = () => {
+          this.setState({
+            count: this.state.count + 1,
+          });
+          console.log("this.state.count", this.state.count);
+          setTimeout(() => {
+            console.log("this.state.count---setTimeout:", this.state.count);
+          }, 1000);
+        };
+
+        render() {
+          return (
+            <div>
+              <p>You clicked {this.state.count} times</p>
+              <button onClick={this.log}>Click me</button>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

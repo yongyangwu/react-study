@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      let count = 0;
+      const { useState, useEffect } = React; //这里需要这么引入
+      function Demo(props) {
+        const [count, setCount] = useState(1);
+        const [val, setValue] = useState("");
+
+        function expensive() {
+          console.log("昂贵的计算渲染");
+          let sum = 0;
+          for (let i = 0; i < count * 100; i++) {
+            sum += i;
+          }
+          return sum;
+        }
+
+        return (
+          <div>
+            <h4>
+              {count}-{val}-{expensive()}
+            </h4>
+            <div>
+              <button onClick={() => setCount(count + 1)}>
+                点击我执行count+1
+              </button>
+              <input
+                value={val}
+                onChange={(event) => setValue(event.target.value)}
+              />
+            </div>
+          </div>
+        );
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

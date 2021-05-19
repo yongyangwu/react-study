@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      const { useState, useEffect, useCallback, memo } = React; //这里需要这么引入
+      const Button = ({ onClickButton, children }) => {
+        return (
+          <div>
+            <button onClick={onClickButton}>{children}</button>
+            <span>{Math.random()}</span>
+          </div>
+        );
+      };
+      const MemoizedButton = memo(Button);
+      function Demo(props) {
+        const [count1, setCount1] = useState(0);
+        const [count2, setCount2] = useState(0);
+        const [count3, setCount3] = useState(0);
+
+        const handleClickButton1 = () => {
+          setCount1(count1 + 1);
+        };
+
+        const handleClickButton2 = useCallback(() => {
+          setCount2(count2 + 1);
+        }, [count2]);
+
+        return (
+          <div>
+            <div>
+              <MemoizedButton onClickButton={handleClickButton1}>
+                Button1
+              </MemoizedButton>
+            </div>
+            <div>
+              <MemoizedButton onClickButton={handleClickButton2}>
+                Button2
+              </MemoizedButton>
+            </div>
+            <div>
+              <MemoizedButton
+                onClickButton={() => {
+                  setCount3(count3 + 1);
+                }}
+              >
+                Button3
+              </MemoizedButton>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

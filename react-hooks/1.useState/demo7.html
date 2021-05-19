@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      const { useState, useEffect } = React; //这里需要这么引入
+      function Demo(props) {
+        const [temp, setTemp] = React.useState(5);
+
+        const log = () => {
+          setTimeout(() => {
+            console.log("3 秒前 temp = 5，现在 temp =", temp);
+          }, 3000);
+        };
+
+        return (
+          <button
+            onClick={() => {
+              log();
+              setTemp(3);
+              // 3 秒前 temp = 5，现在 temp = 5
+            }}
+          >
+            点击我
+          </button>
+        );
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

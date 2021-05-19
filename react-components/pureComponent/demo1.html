@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      class Child extends React.Component {
+        render() {
+          console.log("I am rendering");
+          return <div>I am update every {this.props.seconds} seconds</div>;
+        }
+      }
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: new Date(),
+          };
+        }
+
+        componentDidMount() {
+          setInterval(() => {
+            this.setState({
+              date: new Date(),
+            });
+          }, 1000);
+        }
+
+        render() {
+          return (
+            <div>
+              <Child seconds={1} />
+              <div>{this.state.date.toString()}</div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

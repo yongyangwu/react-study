@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      const { useState, useEffect } = React; //这里需要这么引入
+      function Demo(props) {
+        const [name, setName] = useState("bob");
+        useEffect(() => {
+          console.log(111);
+        });
+        useEffect(() => {
+          console.log(222);
+        }, []);
+        useEffect(() => {
+          console.log(333);
+        }, [name]);
+        console.log("重新渲染");
+        return (
+          <div>
+            <button onClick={() => setName("tom")}>点击</button>
+          </div>
+        );
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>
