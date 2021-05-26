@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>useEffect</title>
-    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
     <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
-    <!-- 生产环境中不建议使用 -->
-    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
   </head>
   <body>
     <div id="example"></div>
@@ -16,29 +18,17 @@
       //每一次渲染都有它自己的 Props and State
       //改变state的值会引起组件重新渲染
       let count = 0;
-      const { useState, useEffect, useMemo } = React; //这里需要这么引入
+      const { useState, useEffect, useRef } = React; //这里需要这么引入
       function Demo(props) {
-        const [count, setCount] = useState(1);
         const [val, setValue] = useState("");
-        const expensive = useMemo(() => {
-          console.log("compute");
-          let sum = 0;
-          for (let i = 0; i < count * 100; i++) {
-            sum += i;
-          }
-          return sum;
-        }, [count]);
+        const inputRef = useRef();
 
         return (
           <div>
-            <h4>
-              {count}-{val}-{expensive}
-            </h4>
             <div>
-              <button onClick={() => setCount(count + 1)}>
-                点击我执行count+1
-              </button>
+              <button onClick={() => inputRef.current.focus()}>点击聚焦</button>
               <input
+                ref={inputRef}
                 value={val}
                 onChange={(event) => setValue(event.target.value)}
               />

@@ -17,32 +17,35 @@
       //记住需要写 type="text/babel"
       //每一次渲染都有它自己的 Props and State
       //改变state的值会引起组件重新渲染
-      let count = 0;
-      const { useState, useEffect } = React; //这里需要这么引入
+      const { useState, useEffect, useRef, createRef } = React; //这里需要这么引入
       function Demo(props) {
-        const [count, setCount] = useState(0);
-        const [val, setValue] = useState("");
-        function compute() {
-          console.log("昂贵的计算渲染");
-          let sum = 0;
-          for (let i = 0; i < count * 100; i++) {
-            sum += i;
-          }
-          return sum;
+        const [count, setCount] = useState(1);
+        const refUseRef = useRef();
+        const refCreateRef = createRef();
+        const handleClick = () => {
+          setTimeout(() => {
+            console.log("count", count);
+            console.log("inputRef", inputRef.current);
+          }, 3000);
+        };
+        if (!refUseRef.current) {
+          refUseRef.current = count;
         }
-
+        if (!refCreateRef.current) {
+          refCreateRef.current = count;
+        }
+        const changeCount = () => {
+          setCount(count + 1);
+          inputRef.current = count + 1;
+        };
         return (
           <div>
-            <h4>count:{count}</h4>
-            <h4>input的值:{val}</h4>
-            <h4>复杂的计算:{compute()}</h4>
-
             <div>
-              <button onClick={() => setCount(count + 1)}>+1</button>
-              <input
-                value={val}
-                onChange={(event) => setValue(event.target.value)}
-              />
+              <p>count:{count}</p>
+              <p>refUseRef:{refUseRef.current}</p>
+              <p>refCreateRef:{refCreateRef.current}</p>
+              <button onClick={changeCount}>+count</button>
+              <button onClick={handleClick}>打印count</button>
             </div>
           </div>
         );

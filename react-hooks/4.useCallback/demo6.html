@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>useEffect</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script> -->
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
   </head>
   <body>
     <div id="example"></div>
@@ -14,7 +17,7 @@
       //记住需要写 type="text/babel"
       //每一次渲染都有它自己的 Props and State
       //改变state的值会引起组件重新渲染
-      const { useState, useEffect, useCallback, memo } = React; //这里需要这么引入
+      const { useState, useEffect, useCallback } = React; //这里需要这么引入
       function Button(props) {
         const { handleClick, children } = props;
         console.log("Button -> render");
@@ -24,16 +27,16 @@
       function Demo(props) {
         const [clickCount, increaseCount] = useState(0);
         // 没有使用`useCallback`，每次渲染都会重新创建内部函数
-        const handleClick = () => {
-          console.log("handleClick");
-          increaseCount(clickCount + 1);
-        };
-
-        // 使用`useCallback`，但也每次渲染都会重新创建内部函数作为`useCallback`的实参
-        // const handleClick = useCallback(() => {
+        // const handleClick = () => {
         //   console.log("handleClick");
         //   increaseCount(clickCount + 1);
-        // }, []);
+        // };
+
+        // 使用`useCallback`，但也每次渲染都会重新创建内部函数作为`useCallback`的实参
+        const handleClick = useCallback(() => {
+          console.log("handleClick");
+          increaseCount(clickCount + 1);
+        }, []);
 
         return (
           <div>
