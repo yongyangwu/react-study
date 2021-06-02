@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
     <script src="../../react.js"></script>
     <script src="../../react-dom.js"></script>
     <script src="../../babel.js"></script>
@@ -35,8 +38,8 @@
         return (
           <div>
             Count: {count}
-            <button onClick={handleClick}>普通更新+</button>
-            <button onClick={handleClickFn}>函数更新+</button>
+            <button onClick={handleClick}>普通更新+1</button>
+            <button onClick={handleClickFn}>函数更新+1</button>
           </div>
         );
       }

@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
     <script src="../../react.js"></script>
     <script src="../../react-dom.js"></script>
     <script src="../../babel.js"></script>
@@ -15,7 +18,6 @@
       const { useState, useEffect } = React; //这里需要这么引入
       function Demo(props) {
         const [count, setCount] = useState(0);
-        console.log("渲染");
         console.log("渲染时候的拿到的count", count);
         function asyncDo() {
           console.log("点击时候的count", count);

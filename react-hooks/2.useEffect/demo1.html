@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>useEffect</title>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
     <script src="../../react.js"></script>
     <script src="../../react-dom.js"></script>
     <script src="../../babel.js"></script>
@@ -17,6 +20,7 @@
       const { useState, useEffect } = React; //这里需要这么引入
       function Demo(props) {
         const [name, setName] = useState("bob");
+        console.log("渲染");
         useEffect(() => {
           console.log(111);
         });
@@ -26,9 +30,10 @@
         useEffect(() => {
           console.log(333);
         }, [name]);
-        console.log("重新渲染");
+
         return (
           <div>
+            <p>{name}</p>
             <button onClick={() => setName("tom")}>点击</button>
           </div>
         );
