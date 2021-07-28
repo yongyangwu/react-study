@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      const { useState, useEffect, useContext } = React; //这里需要这么引入
+      function Demo(props) {
+
+        return (
+          <div>
+            <button onClick={}>父组件改变</button>
+            <Child1 name={name} />
+          </div>
+        );
+      }
+      function Child1(props) {
+        console.log("props", props);
+        function show() {
+          setTimeout(() => {
+            alert(props.name);
+          }, 4000);
+        }
+        return <div onClick={show}>点击我弹出姓名</div>;
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

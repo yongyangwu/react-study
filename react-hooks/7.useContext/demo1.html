@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
+    <script src="../../react.js"></script>
+    <script src="../../react-dom.js"></script>
+    <script src="../../babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //记住需要写 type="text/babel"
+      //每一次渲染都有它自己的 Props and State
+      //改变state的值会引起组件重新渲染
+      let count = 0;
+      const { useState, useEffect, useContext } = React; //这里需要这么引入
+      const TestContext = React.createContext();
+      function Demo(props) {
+        return (
+          <TestContext.Provider value={{ userName: "bob" }}>
+            <Child1 />
+            <Child2 />
+          </TestContext.Provider>
+        );
+      }
+      function Child1() {
+        const { userName } = useContext(TestContext);
+
+        return <div>{userName}</div>;
+      }
+      function Child2() {
+        const { userName } = useContext(TestContext);
+
+        return <div>{userName}</div>;
+      }
+      ReactDOM.render(<Demo />, document.getElementById("example"));
+    </script>
+  </body>
+</html>

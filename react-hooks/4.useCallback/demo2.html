@@ -17,7 +17,7 @@
       //记住需要写 type="text/babel"
       //每一次渲染都有它自己的 Props and State
       //改变state的值会引起组件重新渲染
-      const { useState, useEffect, useCallback } = React; //这里需要这么引入
+      const { useState, useEffect, useCallback,memo } = React; //这里需要这么引入
       function Demo(props) {
         const [count, setCount] = useState(1);
         const [val, setVal] = useState(" ");

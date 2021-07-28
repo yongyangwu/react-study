@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useEffect</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      const { useState, useEffect, useCallback, memo } = React; //这里需要这么引入ParentComponent
+      class ParentComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            count: 0,
+          };
+          this.count = 0;
+        }
+        parentClick() {
+          console.log("this", this);
+          this.count++;
+          this.setState({ count: this.count });
+        }
+        childClick() {
+          console.log("you cvlick child");
+        }
+        render() {
+          return (
+            <div>
+              <div onClick={this.parentClick}>父组件</div>
+              <ChildComponent></ChildComponent>
+            </div>
+          );
+        }
+      }
+      class ChildComponent extends React.Component {
+        render() {
+          console.log("子组件渲染");
+          return <div>子组件</div>;
+        }
+      }
+
+      ReactDOM.render(<ParentComponent />, document.getElementById("example"));
+    </script>
+  </body>
+</html>
